@@ -94,11 +94,7 @@ function App() {
       return;
     }
 
-    if (diff > 60) {
-      // Too long: Enforce maximum 5 years
-      console.warn("Maximum duration is 5 years");
-      return;
-    }
+
 
     if (type === 'start') setStartDate(value);
     if (type === 'end') setEndDate(value);
@@ -120,7 +116,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen w-full bg-background text-foreground overflow-hidden font-sans">
+    <div className="flex flex-col md:flex-row h-screen w-full bg-background text-foreground overflow-hidden font-sans">
       {/* Sidebar */}
       <TickerSelector
         tickers={tickers}
@@ -129,9 +125,9 @@ function App() {
       />
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden relative">
+      <main className="flex-1 flex flex-col h-full overflow-hidden relative w-full">
         {/* Header */}
-        <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-card/50 backdrop-blur-md z-10">
+        <header className="h-auto md:h-16 border-b border-border flex flex-col md:flex-row items-start md:items-center justify-between p-4 md:px-6 bg-card/50 backdrop-blur-md z-10 gap-4 md:gap-0">
           <div className="flex items-center gap-4">
             <h1 className="text-2xl font-bold tracking-tight">
               {selectedTicker || "Select Ticker"}
@@ -146,7 +142,7 @@ function App() {
             )}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-2 md:gap-4 w-full md:w-auto justify-between md:justify-end">
             {/* Date Controls */}
             <div className="flex bg-accent/20 p-1 rounded-lg gap-1">
               {[
@@ -166,12 +162,14 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2 text-sm">
+              <Calendar className="h-4 w-4 text-foreground" />
               <div className="relative">
                 <input
                   type="date"
                   value={startDate}
                   onChange={(e) => handleDateChange('start', e.target.value)}
                   className="bg-card border border-input rounded px-3 py-1 text-xs focus:ring-1 focus:ring-ring"
+                  style={{ colorScheme: 'dark' }}
                 />
               </div>
               <span className="text-muted-foreground">-</span>
@@ -181,6 +179,7 @@ function App() {
                   value={endDate}
                   onChange={(e) => handleDateChange('end', e.target.value)}
                   className="bg-card border border-input rounded px-3 py-1 text-xs focus:ring-1 focus:ring-ring"
+                  style={{ colorScheme: 'dark' }}
                 />
               </div>
             </div>

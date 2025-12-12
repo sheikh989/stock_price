@@ -63,6 +63,15 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Native control theme */
+    color-scheme: dark;
+  }
+
+  /* Invert calendar icon for dark mode if color-scheme doesn't catch it */
+  .dark input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
   }
 }
 
@@ -70,6 +79,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

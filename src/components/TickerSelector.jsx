@@ -14,9 +14,9 @@ const TickerSelector = ({ tickers, selectedTicker, onSelect }) => {
     const filteredTickers = tickers.filter(t => t.toLowerCase().includes(search.toLowerCase()));
 
     return (
-        <div className="flex flex-col h-full bg-card/50 backdrop-blur-sm border-r border-border w-80">
-            <div className="p-4 border-b border-border">
-                <h2 className="text-xl font-bold tracking-tight mb-4">Market</h2>
+        <div className="flex flex-col h-[300px] md:h-full bg-card/50 backdrop-blur-sm border-b md:border-b-0 md:border-r border-border w-full md:w-80 transition-all duration-300 ease-in-out">
+            <div className="p-4 border-b border-border shrink-0">
+                <h2 className="text-xl font-bold tracking-tight mb-4 hidden md:block">Market</h2>
                 <div className="relative">
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                     <input
@@ -28,16 +28,16 @@ const TickerSelector = ({ tickers, selectedTicker, onSelect }) => {
                     />
                 </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-2 scrollbar-hide">
+            <div className="flex-1 overflow-y-auto p-2 scrollbar-hide min-h-0">
                 {filteredTickers.length === 0 ? (
                     <div className="p-4 text-center text-sm text-muted-foreground">No tickers found</div>
                 ) : (
-                    <div className="space-y-1">
+                    <div className="grid grid-cols-2 md:grid-cols-1 gap-1">
                         {filteredTickers.map(ticker => (
                             <button
                                 key={ticker}
                                 onClick={() => onSelect(ticker)}
-                                className={`w-full text-left px-3 py-2.5 rounded-md text-sm font-medium transition-colors
+                                className={`w-full text-left px-3 py-2.5 rounded-md text-sm font-medium transition-colors truncate
                   ${selectedTicker === ticker
                                         ? 'bg-primary text-primary-foreground shadow-sm'
                                         : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
